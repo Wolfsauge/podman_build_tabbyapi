@@ -3,7 +3,7 @@ ARG BUILDKIT_SBOM_SCAN_STAGE=true
 
 # Use an official CUDA runtime with Ubuntu as a parent image
 ARG BASE_IMAGE
-FROM docker.io/nvidia/cuda:${BASE_IMAGE} as build-000
+FROM docker.io/nvidia/cuda:$BASE_IMAGE as build-000
 
 ARG GIT_REPO=https://github.com/theroyallab/tabbyAPI
 ARG DO_PULL=true
