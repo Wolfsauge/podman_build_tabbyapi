@@ -38,6 +38,6 @@ jobs:
           context: .
           provenance: mode=max
           sbom: true
-          tags: ${{ env.IMAGE_NAME }}:${{ matrix.BASE_IMAGE }}
+          tags: ${{ env.IMAGE_NAME }}:${{ matrix.BASE_IMAGE }}-runpod
           push: true
           build-args: BASE_IMAGE=${{ matrix.BASE_IMAGE }}
