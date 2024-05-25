@@ -46,3 +46,4 @@ jobs:
           sbom: true
           tags: ${{ steps.meta.outputs.tags }}
           push: true
+          build-args: BASE_IMAGE=${{ env.BASE_IMAGE }}
