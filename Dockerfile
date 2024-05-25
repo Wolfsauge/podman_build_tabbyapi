@@ -1,8 +1,9 @@
+ARG BUILDKIT_SBOM_SCAN_CONTEXT=true
+ARG BUILDKIT_SBOM_SCAN_STAGE=true
+
 # Use an official CUDA runtime with Ubuntu as a parent image
-# FROM docker.io/nvidia/cuda:12.4.1-runtime-ubuntu22.04 as build124
-# FROM docker.io/nvidia/cuda:12.3.2-runtime-ubuntu22.04 as build123
-# FROM docker.io/nvidia/cuda:12.2.2-runtime-ubuntu22.04 as build122
-FROM docker.io/nvidia/cuda:12.1.0-runtime-ubuntu22.04 as build121
+ARG BASE_IMAGE
+FROM docker.io/nvidia/cuda:${BASE_IMAGE} as build-000
 
 ARG GIT_REPO=https://github.com/theroyallab/tabbyAPI
 ARG DO_PULL=true

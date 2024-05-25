@@ -1,0 +1,52 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch
+
+env:
+  IMAGE_NAME: nschle/tabbyapi
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        BASE_IMAGE:
+          - 12.4.1-runtime-ubuntu22.04
+          - 12.3.2-runtime-ubuntu22.04
+          - 12.2.2-runtime-ubuntu22.04
+          - 12.1.0-runtime-ubuntu22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .
+
+      - name: Set BASE_IMAGE-specific context
+        run: |
+          cd $BASE_IMAGE
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE_NAME }}
+
+      - name: Build image and push to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          provenance: mode=max
+          sbom: true
+          tags: ${{ steps.meta.outputs.tags }}
+          push: true
