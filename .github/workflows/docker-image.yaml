@@ -22,10 +22,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: .
-
-      - name: Set BASE_IMAGE-specific context
-        run: |
-          cd $BASE_IMAGE
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
