@@ -23,8 +23,7 @@ $ cd /app/models; \
     turboderp/Llama-3-70B-Instruct-exl2 \
     --local-dir turboderp_Llama-3-70B-Instruct-exl2_6.0bpw \
     --revision 6.0bpw \
-    --cache-dir /app/models/.cache \
-    --local-dir-use-symlinks False
+    --cache-dir /app/models/.cache
 ```
 
 URL: Huggingface repository [turboderp/Llama-3-70B-Instruct-exl2](https://huggingface.co/turboderp/Llama-3-70B-Instruct-exl2)
