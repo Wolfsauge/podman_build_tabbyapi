@@ -12,7 +12,7 @@ This repo contains scripts for building [theroyallab/tabbyAPI](https://github.co
 
 ## Related Repositories
 * The Royal Lab's [tabbyAPI](https://github.com/theroyallab/tabbyAPI/) GitHub
-* Docker Hub [repo](https://hub.docker.com/r/nschle/tabbyAPI) with custom RunPod images
+* Docker Hub [repo](https://hub.docker.com/r/nschle/tabbyapi) with custom RunPod images
 
 ## References
 Inspirations and scripts from the following projects were used.
