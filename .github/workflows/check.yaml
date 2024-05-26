@@ -13,7 +13,7 @@ jobs:
       - name: Fetch latest commit checksum from GitHub API
         run: |
           curl -sL https://api.github.com/repos/theroyallab/tabbyAPI/commits | \
-          ".[0] | .sha" > tabbyapi-latest-commit-sha.txt
+          jq ".[0] | .sha" > tabbyapi-latest-commit-sha.txt
       - name: Fail early in case of API null response
         if: ${{ github.status == 'success' }}
         run: |
