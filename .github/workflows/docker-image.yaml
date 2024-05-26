@@ -1,10 +1,11 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'tabbyapi-latest-commit-sha.txt'
+  workflow-dispatch
+#  push:
+#    branches: [ "main" ]
+#    paths:
+#      - 'tabbyapi-latest-commit-sha.txt'
 
 env:
   IMAGE_NAME: nschle/tabbyapi
