@@ -1,0 +1,31 @@
+name: Check for new commits
+on:
+  schedule:
+    - cron:  "24,54 * * * *"
+
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GHA_TABBYAPI_COMMIT_CHECK }}
+      - name: Fetch latest commit checksum from GitHub API
+        run: |
+          curl -sL https://api.github.com/repos/theroyallab/tabbyAPI/commits | \
+          ".[0] | .sha" > tabbyapi-latest-commit-sha.txt
+      - name: Fail early in case of API null response
+        if: ${{ github.status == 'success' }}
+        run: |
+          if grep -qE '^null$' tabbyapi-latest-commit-sha.txt; then
+            exit 1
+          fi
+      - name: Check if latest commit checksum changed
+        run: echo "modified=$([ -z `git status --porcelain` ] && echo false || echo true)" >> $GITHUB_ENV
+      - name: Commit the latest commit checksum
+        if: ${{ env.modified }} == "true"
+        run: |
+          git config --global user.name 'Wolfsauge'
+          git config --global user.email 'no@email'
+          git commit -am "New commit checksum discovered"
+          git push
