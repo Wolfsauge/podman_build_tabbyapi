@@ -21,7 +21,7 @@ jobs:
             exit 1
           fi
       - name: Check if latest commit checksum changed
-        run: echo "modified=$([ -z `git status --porcelain` ] && echo false || echo true)" >> $GITHUB_ENV
+        run: echo "modified=$([[ -z `git status --porcelain` ]] && echo false || echo true)" >> $GITHUB_ENV
       - name: Commit the latest commit checksum
         if: ${{ env.modified }} == "true"
         run: |
