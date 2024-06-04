@@ -15,7 +15,6 @@ jobs:
           curl -sL https://api.github.com/repos/theroyallab/tabbyAPI/commits | \
           jq ".[0] | .sha" > tabbyapi-latest-commit-sha.txt
       - name: Fail early in case of API null response
-        if: ${{ github.status == 'success' }}
         run: |
           if grep -qE '^null$' tabbyapi-latest-commit-sha.txt; then
             exit 1
